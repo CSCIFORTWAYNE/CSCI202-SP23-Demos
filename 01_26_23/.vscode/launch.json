@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/main",
-            "args": [],
+            "args": ["<","input.txt",">", "output.txt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -23,8 +23,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++ build active file",
-            "miDebuggerPath": "/usr/bin/gdb"
+            "preLaunchTask": "C/C++: g++ build active file"
         }
     ],
     "version": "2.0.0"

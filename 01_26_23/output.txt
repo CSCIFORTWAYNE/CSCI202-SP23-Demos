@@ -1,0 +1,26 @@
+How many laptops? Enter the laptop manufacturer: Enter the laptop model: Enter the laptop year: Enter the laptop serial number: Manufacturer: Dell
+Model: Latitude
+Operating System: No Operating System
+Year: 2017
+Serial Number: 12345
+Would you like to install an operating system? What operating system would you like to install? That is an invalid operating System.  The available operating systems are: Windows
+Mac OS
+Linux
+No Operating System
+What operating system would you like to install? Enter the laptop manufacturer: Enter the laptop model: Enter the laptop year: Enter the laptop serial number: Manufacturer: Microsoft
+Model: Surface Pro 3
+Operating System: No Operating System
+Year: 2014
+Serial Number: 28382skdj
+Would you like to install an operating system? What operating system would you like to install? Manufacturer: Dell
+Model: Latitude
+Operating System: Mac OS
+Year: 2017
+Serial Number: 12345
+******************************************
+Manufacturer: Microsoft
+Model: Surface Pro 3
+Operating System: Windows
+Year: 2014
+Serial Number: 28382skdj
+******************************************

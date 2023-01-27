@@ -9,9 +9,20 @@ laptop::laptop(std::string manufacturer, std::string model, std::string serialNu
         throw std::out_of_range("The year has to be after 1985");
     else
         this->year = year;
+    this->os = NONE;
 }
 
 void laptop::changeOS(OSType os)
 {
     this->os = os;
+}
+
+std::ostream &operator<<(std::ostream & o, const laptop & l)
+{
+    o << "Manufacturer: " << l.manufacturer << std::endl;
+    o << "Model: " << l.model << std::endl;
+    o << "Operating System: " << OSStr.at(l.os) << std::endl;
+    o << "Year: " << l.year << std::endl;
+    o << "Serial Number: " << l.serialNum << std::endl;
+    return o;
 }

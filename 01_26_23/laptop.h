@@ -3,20 +3,23 @@
 #include <string>
 #include <map>
 #include <stdexcept>
+#include <iostream>
 
 enum OSType
 {
     WIN,
     MAC,
-    LIN
+    LIN,
+    NONE
 };
-const std::map<OSType, std::string> OSStr = {{WIN, "Windows"}, {MAC, "Mac OS"}, {LIN, "Linux"}};
-const std::map<std::string, OSType> StrOS = {{"WINDOWS", WIN}, {"MAC OS", MAC}, {"LINUX", LIN}};
+const std::map<OSType, std::string> OSStr = {{WIN, "Windows"}, {MAC, "Mac OS"}, {LIN, "Linux"}, {NONE, "No Operating System"}};
+const std::map<std::string, OSType> StrOS = {{"WINDOWS", WIN}, {"MAC OS", MAC}, {"LINUX", LIN}, {"NO OPERATING SYSTEM", NONE}, {"NONE", NONE}};
 class laptop
 {
 public:
     laptop(std::string manufacturer, std::string model, std::string serialNum, int year); //throws out_of_range
     void changeOS(OSType);
+    friend std::ostream& operator<<(std::ostream&, const laptop&);
 private:
     std::string manufacturer;
     std::string model;
