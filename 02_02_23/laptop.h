@@ -19,6 +19,8 @@ class laptop
 public:
     laptop(std::string manufacturer, std::string model, std::string serialNum, int year); //throws out_of_range
     void changeOS(OSType);
+    bool operator==(const laptop&);
+    bool operator!=(const laptop&);
     friend std::ostream& operator<<(std::ostream&, const laptop&);
 private:
     std::string manufacturer;

@@ -1,0 +1,26 @@
+7 3 12 
+7 3 12 
+How many laptops? Enter the laptop manufacturer: Enter the laptop model: Enter the laptop year: Enter the laptop serial number: Enter the laptop manufacturer: Enter the laptop model: Enter the laptop year: Enter the laptop serial number: Manufacturer: Dell
+Model: Latitude
+Operating System: No Operating System
+Year: 2017
+Serial Number: 12345
+ Manufacturer: Microsoft
+Model: Surface Pro 3
+Operating System: No Operating System
+Year: 2014
+Serial Number: 28382skdj
+ Manufacturer: Dell
+Model: Latitude
+Operating System: Windows
+Year: 2017
+Serial Number: 12345
+
+******************************************
+Manufacturer: Microsoft
+Model: Surface Pro 3
+Operating System: Windows
+Year: 2014
+Serial Number: 28382skdj
+
+******************************************

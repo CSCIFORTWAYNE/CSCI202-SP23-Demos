@@ -3,17 +3,9 @@
 
 #include <iostream>
 #include <stdexcept>
+#include "linkedListIterator.h"
 
-template <class type>
-struct nodeType
-{
-    type *data;
-    nodeType<type> *link;
-    ~nodeType()
-    {
-        delete data;
-    }
-};
+
 
 template <class type>
 class linkedListType
@@ -24,7 +16,7 @@ public:
     const linkedListType<type> &operator=(const linkedListType<type> &);
     virtual void insert(const type &newInfo) = 0;
     virtual void deleteNode(const type &deleteItem) = 0;
-    virtual void search(const type &searchItem) const = 0;
+    virtual bool search(const type &searchItem) const = 0;
     ~linkedListType();
     void initializeList();
     bool isEmptyList() const;
@@ -33,6 +25,8 @@ public:
     void destroyList();
     type *front() const;
     type *back() const;
+    linkedListIterator<type> begin();
+    linkedListIterator<type> end();
 
 protected:
     nodeType<type> *head;
@@ -64,7 +58,7 @@ bool linkedListType<type>::isEmptyList() const
 }
 
 template <class type>
-void print(std::ostream & out) const
+void linkedListType<type>::print(std::ostream & out) const
 {
     nodeType<type> * current;
     current = head;
@@ -82,7 +76,7 @@ int linkedListType<type>::length() const
 }
 
 template <class type>
-void destroyList()
+void linkedListType<type>::destroyList()
 {
     nodeType<type> *temp;
     while (head != nullptr)
@@ -112,14 +106,14 @@ type *linkedListType<type>::back() const
 }
 
 template <class type>
-linkedListType(const linkedListType<type> &otherList)
+linkedListType<type>::linkedListType(const linkedListType<type> &otherList)
 {
     head = nullptr;
     copyList(otherList);
 }
 
 template<class type>
-const linkedListType<type> &operator=(const linkedListType<type> & otherList)
+const linkedListType<type>& linkedListType<type>::operator=(const linkedListType<type> & otherList)
 {
     if(this != &otherList)
     {
@@ -167,6 +161,20 @@ void linkedListType<type>::copyList(const linkedListType<type> &otherList)
             current = current->link;
         }
     }
+}
+
+template <class type>
+linkedListIterator<type> linkedListType<type>::begin()
+{
+    linkedListIterator<type> temp(head);
+    return temp;
+}
+
+template <class type>
+linkedListIterator<type> linkedListType<type>::end()
+{
+    linkedListIterator<type> temp(nullptr);
+    return temp;
 }
 
 #endif

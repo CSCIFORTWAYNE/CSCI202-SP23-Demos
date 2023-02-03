@@ -17,6 +17,16 @@ void laptop::changeOS(OSType os)
     this->os = os;
 }
 
+bool laptop::operator==(const laptop & ol)
+{
+    return this->serialNum == ol.serialNum;
+}
+
+bool laptop::operator!=(const laptop & ol)
+{
+    return this->serialNum != ol.serialNum;
+}
+
 std::ostream &operator<<(std::ostream & o, const laptop & l)
 {
     o << "Manufacturer: " << l.manufacturer << std::endl;

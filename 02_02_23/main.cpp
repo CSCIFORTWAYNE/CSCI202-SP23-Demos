@@ -3,13 +3,25 @@
 #include <climits>
 #include <cctype>
 #include <algorithm>
+#include <sstream>
 #include "laptop.h"
+#include "unorderedLinkedList.h"
 
 void resetStream();
 
 int main()
 {
-    laptop **computers;
+    unorderedLinkedList<int> list;
+    list.insert(7);
+    list.insert(3);
+    list.insert(12);
+    list.print(std::cout);
+    std::ostringstream out;
+    list.print(out);
+    std::cout << std::endl
+              << out.str() << std::endl;
+
+    unorderedLinkedList<laptop> computers;
     int numLaptops = 0;
     std::string manufacturer, model, serialNum, os;
     int year;
@@ -25,7 +37,7 @@ int main()
         std::cout << "You entered an invalid value.\nHow many laptops? ";
         std::cin >> numLaptops;
     }
-    computers = new laptop *[numLaptops];
+
     for (int i = 0; i < numLaptops; i++)
     {
         std::cout << "Enter the laptop manufacturer: ";
@@ -46,9 +58,9 @@ int main()
         }
         std::cout << "Enter the laptop serial number: ";
         getline(std::cin >> std::ws, serialNum);
-        computers[i] = new laptop(manufacturer, model, serialNum, year);
-        std::cout << *computers[i];
-
+        laptop l(manufacturer, model, serialNum, year);
+        computers.insert(l);
+        /*
         std::cout << "Would you like to install an operating system? ";
         std::cin >> install;
         install = tolower(install);
@@ -77,19 +89,20 @@ int main()
                 std::transform(os.begin(), os.end(), os.begin(), ::toupper);
             }
             computers[i]->changeOS(StrOS.at(os));
-        }
+
+        }*/
     }
 
-    for (int i = 0; i < numLaptops; i++)
+    computers.print(std::cout);
+
+    for (linkedListIterator<laptop> it = computers.begin(); it != computers.end(); ++it)
     {
-        std::cout << *computers[i];
+        it.operator*().changeOS(WIN);
+        std::cout << *it << std::endl;
         std::cout << std::setw(42) << std::setfill('*') << "*" << std::endl;
+        
     }
-    for (int i = 0; i < numLaptops; i++)
-    {
-        delete computers[i];
-    }
-    delete [] computers;
+
     // laptop l("Dell", "Latitude", "12345", 2017);
     // std::cout << l;
     // std::cout << std::setw(42) << std::setfill('*') << "*" << std::endl;
