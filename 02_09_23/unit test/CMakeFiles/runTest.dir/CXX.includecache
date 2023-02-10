@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/arrayStack.h
+stackADT.h
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/stackADT.h
+stdexcept
+-
+
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/linkedStack.h
+stackADT.h
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/stackADT.h
+stdexcept
+-
+
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/stackADT.h
+
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/tests.cpp
+arrayStack.h
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/arrayStack.h
+linkedStack.h
+/home/avenable/CSCI202-SP23-Demos/02_09_23/unit test/linkedStack.h
+gtest/gtest.h
+-
+gmock/gmock.h
+-
+stdexcept
+-
+
