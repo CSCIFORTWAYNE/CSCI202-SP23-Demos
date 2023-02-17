@@ -29,8 +29,6 @@ private:
     t **list;
 };
 
-#endif
-
 template <class t>
 inline bool arrayQueue<t>::isEmptyQueue() const
 {
@@ -68,6 +66,8 @@ void arrayQueue<t>::enqueue(const t &queueElement)
     }
     if (++this->queueRear >= this->maxQueueSize)
         this->queueRear = 0;
+    list[queueRear] = new t(queueElement);
+    count++;
 }
 template <class t>
 inline t arrayQueue<t>::dequeue()
@@ -110,3 +110,50 @@ inline arrayQueue<t>::arrayQueue(int size)
     this->count = 0;
     this->initializeQueue();
 }
+
+template <class t>
+arrayQueue<t>::~arrayQueue()
+{
+    initializeQueue();
+    delete[] list;
+}
+
+template <class t>
+void arrayQueue<t>::copyQueue(const arrayQueue<t> &otherQueue)
+{
+    if (!this->isEmptyQueue())
+    {
+        this->initializeQueue();
+    }
+    delete[] this->list;
+    this->maxQueueSize = otherQueue.maxQueueSize;
+    this->count = otherQueue.count;
+    this->list = new t *[this->maxQueueSize];
+    this->queueFront = otherQueue.queueFront;
+    this->queueRear = otherQueue.queueRear;
+    bool end = false;
+    for (int i = front; !end; i++)
+    {
+        if (i >= this->maxQueueSize)
+            i = 0;
+
+        this->list[i] = new t(*(otherQueue.list[i]));
+        if (i == this->queueRear)
+            end = true;
+    }
+}
+
+template <class t>
+inline arrayQueue<t>::arrayQueue(const arrayQueue<t> &otherQueue)
+{
+    copyQueue(otherQueue);
+}
+
+template <class t>
+const arrayQueue<t> &arrayQueue<t>::operator=(const arrayQueue<t> &otherQueue)
+{
+    if (this != &otherQueue)
+        copyQueue(otherQueue);
+    return *this;
+}
+#endif

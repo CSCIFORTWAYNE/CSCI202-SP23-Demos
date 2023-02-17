@@ -11,7 +11,7 @@ struct queueNode
     queueNode<t> *link;
     ~queueNode()
     {
-        delete info;
+        delete data;
     }
 };
 
@@ -36,8 +36,6 @@ private:
     queueNode<t> *queueRear;
     void copyQueue(const linkedQueue<t> &);
 };
-
-#endif
 
 template <class t>
 inline bool linkedQueue<t>::isEmptyQueue() const
@@ -111,8 +109,17 @@ inline t linkedQueue<t>::dequeue()
         this->queueFront = this->queueFront->link;
         t ret(*(temp->data));
         delete temp;
-        return t;
+        return ret;
     }
+}
+
+template <class t>
+inline const linkedQueue<t> &linkedQueue<t>::operator=(const linkedQueue<t> &otherQueue)
+{
+    if (this != &otherQueue)
+        copyQueue(otherQueue);
+
+    return *this;
 }
 
 template <class t>
@@ -121,3 +128,31 @@ inline linkedQueue<t>::linkedQueue()
     this->queueFront = nullptr;
     this->queueRear = nullptr;
 }
+
+template <class t>
+inline linkedQueue<t>::linkedQueue(const linkedQueue<t> &otherQueue)
+{
+    queueFront = nullptr;
+    queueRear = nullptr;
+    copyQueue(otherQueue);
+}
+
+template <class t>
+linkedQueue<t>::~linkedQueue()
+{
+    initializeQueue();
+}
+
+template <class t>
+void linkedQueue<t>::copyQueue(const linkedQueue<t> &otherQueue)
+{
+    this->initializeQueue();
+    queueNode<t> *current;
+    current = otherQueue.queueFront;
+    while (current != nullptr)
+    {
+        this->enqueue(*(current->data));
+        current = current->link;
+    }
+}
+#endif
