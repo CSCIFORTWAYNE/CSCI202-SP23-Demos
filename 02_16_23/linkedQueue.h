@@ -7,7 +7,7 @@
 template <class t>
 struct queueNode
 {
-    t *info;
+    t *data;
     queueNode<t> *link;
     ~queueNode()
     {
@@ -49,6 +49,70 @@ template <class t>
 inline bool linkedQueue<t>::isFullQueue() const
 {
     return false;
+}
+
+template <class t>
+void linkedQueue<t>::initializeQueue()
+{
+    queueNode<t> *current;
+    while (this->queueFront != nullptr)
+    {
+        current = this->queueFront;
+        this->queueFront = this->queueFront->link;
+        delete current;
+    }
+    this->queueRear = nullptr;
+}
+
+template <class t>
+inline t linkedQueue<t>::front() const
+{
+    if (this->isEmptyQueue())
+        throw std::out_of_range("Cannot view item in an empty queue.");
+    return *(queueFront->data);
+}
+
+template <class t>
+inline t linkedQueue<t>::back() const
+{
+    if (this->isEmptyQueue())
+        throw std::out_of_range("Cannot view item in an empty queue.");
+    return *(queueRear->data);
+}
+
+template <class t>
+void linkedQueue<t>::enqueue(const t &queueElement)
+{
+    queueNode<t> *newNode;
+    newNode = new queueNode<t>;
+    newNode->data = new t(queueElement);
+    newNode->link = nullptr;
+    if (this->isEmptyQueue())
+    {
+        this->queueFront = newNode;
+        this->queueRear = newNode;
+    }
+    else
+    {
+        this->queueRear->link = newNode;
+        this->queueRear = newNode;
+    }
+}
+
+template <class t>
+inline t linkedQueue<t>::dequeue()
+{
+    if (isEmptyQueue())
+        throw std::out_of_range("Cannot remove from an empty queue.");
+    else
+    {
+        queueNode<t> *temp;
+        temp = this->queueFront;
+        this->queueFront = this->queueFront->link;
+        t ret(*(temp->data));
+        delete temp;
+        return t;
+    }
 }
 
 template <class t>

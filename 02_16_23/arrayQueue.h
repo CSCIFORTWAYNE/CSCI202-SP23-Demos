@@ -42,12 +42,71 @@ inline bool arrayQueue<t>::isFullQueue() const
 {
     return this->count == this->maxQueueSize;
 }
+template <class t>
+inline t arrayQueue<t>::front() const
+{
+    if (this->isEmptyQueue())
+        throw std::out_of_range("Cannot view item in an empty queue.");
+
+    return *(list[queueFront]);
+}
+template <class t>
+inline t arrayQueue<t>::back() const
+{
+    if (this->isEmptyQueue())
+        throw std::out_of_range("Cannot view item in an empty queue.");
+
+    return *(list[queueRear]);
+}
+template <class t>
+void arrayQueue<t>::enqueue(const t &queueElement)
+{
+
+    if (this->isFullQueue())
+    {
+        throw std::overflow_error("Cannot add to a full queue.");
+    }
+    if (++this->queueRear >= this->maxQueueSize)
+        this->queueRear = 0;
+}
+template <class t>
+inline t arrayQueue<t>::dequeue()
+{
+    if (this->isEmptyQueue())
+        throw std::out_of_range("Cannot delete from an empty queue.");
+    t ret(*(list[this->queueFront]));
+    delete list[this->queueFront++];
+    if (this->queueFront >= this->maxQueueSize)
+        this->queueFront = 0;
+    this->count--;
+    return ret;
+}
+template <class t>
+void arrayQueue<t>::initializeQueue()
+{
+    if (!this->isEmptyQueue())
+    {
+        int i = this->queueFront;
+        bool end = false;
+        while (!end)
+        {
+            if (i == this->queueRear)
+                end = true;
+            delete list[i++];
+            if (i >= this->maxQueueSize)
+                i = 0;
+        }
+    }
+    this->queueFront = 0;
+    this->queueRear = this->maxQueueSize - 1;
+    this->count = 0;
+}
 
 template <class t>
 inline arrayQueue<t>::arrayQueue(int size)
 {
     this->maxQueueSize = size;
     this->list = new t *[maxQueueSize];
-    count = 0;
-    initializeQueue();
+    this->count = 0;
+    this->initializeQueue();
 }
