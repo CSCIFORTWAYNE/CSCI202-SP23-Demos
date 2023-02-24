@@ -1,12 +1,13 @@
 #include "arrayQueue.h"
 #include "linkedQueue.h"
+#include "fakePriorityQueue.h"
 #include <iostream>
 #include <iomanip>
 
 int main()
 {
     arrayQueue<int> aq;
-    linkedQueue<int> lq;
+    fakePriorityQueue<int> lq;
     for (int i = 0; i < 100; i++)
     {
         aq.enqueue(i);

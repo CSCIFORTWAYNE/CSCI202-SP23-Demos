@@ -31,7 +31,7 @@ public:
     linkedQueue(const linkedQueue<t> &);
     ~linkedQueue();
 
-private:
+protected:
     queueNode<t> *queueFront;
     queueNode<t> *queueRear;
     void copyQueue(const linkedQueue<t> &);
