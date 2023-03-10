@@ -29,8 +29,8 @@ public:
     int treeLeavesCount(const T &searchItem) const;
     ~binaryTree();
     virtual bool search(const T &searchItem) const = 0;
-    virtual void insert(const T &insertItem) const = 0;
-    virtual void deleteNode(const T &deleteItem) const = 0;
+    virtual void insert(const T &insertItem) = 0;
+    virtual void deleteNode(const T &deleteItem) = 0;
 
 protected:
     binaryNode<T> *root;
@@ -45,7 +45,7 @@ private:
     int nodeCount(const T &searchItem, binaryNode<T> *p, int count = 0) const;   // implemented as lecture activity
     int leavesCount(const T &searchItem, binaryNode<T> *p, int count = 0) const; // implemented as lecture activity
     int max(int x, int y) const;
-}
+};
 
 template <class T>
 const binaryTree<T> &binaryTree<T>::operator=(const binaryTree<T> &otherTree)
@@ -164,9 +164,9 @@ void binaryTree<T>::inorder(binaryNode<T> *p, std::ostringstream &out) const
 {
     if (p != nullptr)
     {
-        inorder(p->lTree);
+        inorder(p->lTree, out);
         out << *(p->data) << "\n\n";
-        inorder(p->rTree);
+        inorder(p->rTree, out);
     }
 }
 template <class T>
@@ -175,8 +175,8 @@ void binaryTree<T>::preorder(binaryNode<T> *p, std::ostringstream &out) const
     if (p != nullptr)
     {
         out << *(p->data) << "\n\n";
-        preorder(p->lTree);
-        preorder(p->rTree);
+        preorder(p->lTree, out);
+        preorder(p->rTree, out);
     }
 }
 template <class T>
@@ -184,8 +184,8 @@ void binaryTree<T>::postorder(binaryNode<T> *p, std::ostringstream &out) const
 {
     if (p != nullptr)
     {
-        postorder(p->lTree);
-        postorder(p->rTree);
+        postorder(p->lTree, out);
+        postorder(p->rTree, out);
         out << *(p->data) << "\n\n";
     }
 }
