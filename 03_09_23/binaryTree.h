@@ -120,22 +120,31 @@ void binaryTree<T>::destroy(binaryNode<T> *&p)
 template <class T>
 void binaryTree<T>::inorder(binaryNode<T> *p, std::ostringstream &out) const
 {
-    inorder(p->lTree);
-    out << *(p->data) << "\n\n";
-    inorder(p->rTree);
+    if (p != nullptr)
+    {
+        inorder(p->lTree);
+        out << *(p->data) << "\n\n";
+        inorder(p->rTree);
+    }
 }
 template <class T>
 void binaryTree<T>::preorder(binaryNode<T> *p, std::ostringstream &out) const
 {
-    out << *(p->data) << "\n\n";
-    preorder(p->lTree);
-    preorder(p->rTree);
+    if (p != nullptr)
+    {
+        out << *(p->data) << "\n\n";
+        preorder(p->lTree);
+        preorder(p->rTree);
+    }
 }
 template <class T>
 void binaryTree<T>::postorder(binaryNode<T> *p, std::ostringstream &out) const
 {
-    postorder(p->lTree);
-    postorder(p->rTree);
-    out << *(p->data) << "\n\n";
+    if (p != nullptr)
+    {
+        postorder(p->lTree);
+        postorder(p->rTree);
+        out << *(p->data) << "\n\n";
+    }
 }
 #endif
