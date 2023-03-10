@@ -23,6 +23,14 @@ public:
     std::string inorderTraversal() const;
     std::string preorderTraversal() const;
     std::string postorderTraversal() const;
+    bool isEmpty() const;
+    int treeheight() const;
+    int treeNodeCount(const T &searchItem) const;
+    int treeLeavesCount(const T &searchItem) const;
+    ~binaryTree();
+    virtual bool search(const T &searchItem) const = 0;
+    virtual void insert(const T &insertItem) const = 0;
+    virtual void deleteNode(const T &deleteItem) const = 0;
 
 protected:
     binaryNode<T> *root;
@@ -33,6 +41,10 @@ private:
     void inorder(binaryNode<T> *p, std::ostringstream &out) const;
     void preorder(binaryNode<T> *p, std::ostringstream &out) const;
     void postorder(binaryNode<T> *p, std::ostringstream &out) const;
+    int height(binaryNode<T> *p) const;
+    int nodeCount(const T &searchItem, binaryNode<T> *p, int count = 0) const;   // implemented as lecture activity
+    int leavesCount(const T &searchItem, binaryNode<T> *p, int count = 0) const; // implemented as lecture activity
+    int max(int x, int y) const;
 }
 
 template <class T>
@@ -94,6 +106,36 @@ std::string binaryTree<T>::postorderTraversal() const
 }
 
 template <class T>
+inline bool binaryTree<T>::isEmpty() const
+{
+    return root == nullptr;
+}
+
+template <class T>
+inline int binaryTree<T>::treeheight() const
+{
+    return height(root);
+}
+
+template <class T>
+inline int binaryTree<T>::treeNodeCount(const T &searchItem) const
+{
+    return nodeCount(searchItem, root);
+}
+
+template <class T>
+inline int binaryTree<T>::treeLeavesCount(const T &searchItem) const
+{
+    return leavesCount(searchItem, root);
+}
+
+template <class T>
+inline binaryTree<T>::~binaryTree()
+{
+    destroy(root);
+}
+
+template <class T>
 void binaryTree<T>::copyTree(binaryNode<T> *&copiedTreeRoot, binaryNode<T> *otherTreeRoot)
 {
     if (otherTreeRoot == nullptr)
@@ -146,5 +188,21 @@ void binaryTree<T>::postorder(binaryNode<T> *p, std::ostringstream &out) const
         postorder(p->rTree);
         out << *(p->data) << "\n\n";
     }
+}
+template <class T>
+int binaryTree<T>::height(binaryNode<T> *p) const
+{
+    if (p == nullptr)
+        return 0;
+    else
+        return 1 + max(height(p->lTree), height(p->rTree));
+}
+template <class T>
+inline int binaryTree<T>::max(int x, int y) const
+{
+    if (x >= y)
+        return x;
+    else
+        return y;
 }
 #endif
