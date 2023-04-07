@@ -1,0 +1,7 @@
+https://networkx.org/
+https://matplotlib.org/
+
+sudo apt install python3-pip
+pip install networkx
+pip install matplotlib
+sudo apt-get install python3-tk
