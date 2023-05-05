@@ -35,12 +35,12 @@ int main()
                 if ((leap && day > 29) || !leap)
                     std::cout << " Invalid date!" << std::endl;
                 else if (leap)
-                    std::cout << "Valid date: Year=" << year << ", month=" << month << ", day=" << day << std::endl;
+                    std::cout << "Valid Date: " << parts[0] << std::endl;
             }
             else if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
                 std::cout << " Invalid date!" << std::endl;
             else
-                std::cout << "Valid date: Year=" << year << ", month=" << month << ", day=" << day << std::endl;
+                std::cout << "Valid Date: " << parts[0] << std::endl;
         }
         else
         {
